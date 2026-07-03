@@ -1,0 +1,17 @@
+# Environment Variables
+.env
+
+# Python Cache Files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Dev / Scratch folders
+scratch/
+.system_generated/
+*.log
