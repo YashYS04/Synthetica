@@ -4,6 +4,8 @@ Synthetica is an automated, multi-agent focus group simulator designed to valida
 
 This project was built as a capstone project for the **Google AI Agents: Intensive Vibe Coding Course** on Kaggle, demonstrating state-of-the-art agent architectures, Model Context Protocol (MCP), and production-grade security guardrails.
 
+**🔗 Live Demo URL:** [https://synthetica-39494667886.us-central1.run.app](https://synthetica-39494667886.us-central1.run.app)
+
 ---
 
 ## 🚀 Key Features & Rubric Highlights
