@@ -17,9 +17,21 @@ def get_genai_client() -> genai.Client:
     Supports both Google AI Studio (via GEMINI_API_KEY) and Vertex AI (via vertexai=True).
     """
     # 1. Check if Vertex AI configuration is requested
-    use_vertex = os.getenv("GOOGLE_GENAI_USE_VERTEXAI", "false").lower() == "true"
+    use_vertex_raw = os.getenv("GOOGLE_GENAI_USE_VERTEXAI", "false").lower()
+    use_vertex = "true" in use_vertex_raw
     vertex_project = os.getenv("VERTEX_PROJECT")
     vertex_location = os.getenv("VERTEX_LOCATION", "us-central1")
+
+    # Defensive parsing for Powershell-concatenated env vars
+    for val in os.environ.values():
+        if "vertex_project=" in val.lower():
+            for part in val.split():
+                if "=" in part:
+                    k, v = part.split("=", 1)
+                    if k.upper() == "VERTEX_PROJECT":
+                        vertex_project = v
+                    elif k.upper() == "VERTEX_LOCATION":
+                        vertex_location = v
 
     if use_vertex or vertex_project:
         print(f"Initializing GenAI Client for Vertex AI (Project: {vertex_project}, Location: {vertex_location})...")
