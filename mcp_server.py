@@ -6,13 +6,15 @@ from agents import MarketResearcher, MarketingAuditAgent
 # Initialize FastMCP Server
 mcp = FastMCP("Synthetica Market Sandbox Tools")
 
+# Initialize global GenAI client once
+client = get_genai_client()
+
 @mcp.tool()
 def research_market(idea: str, industry: str) -> str:
     """
     Perform a search-grounded competitor research and market landscape analysis for a given startup idea.
     """
     print(f"MCP Action: Researching {industry} market for idea: {idea[:60]}...", file=sys.stderr)
-    client = get_genai_client()
     researcher = MarketResearcher(client)
     report = researcher.research(idea, industry)
     return report
@@ -23,7 +25,6 @@ def audit_pitch(idea: str, industry: str) -> str:
     Perform a copywriting and marketing value audit on a startup idea, indicating strengths, weaknesses, and copywriting suggestions.
     """
     print(f"MCP Action: Auditing pitch for idea: {idea[:60]}...", file=sys.stderr)
-    client = get_genai_client()
     auditor = MarketingAuditAgent(client)
     audit = auditor.audit(idea, industry)
     return audit.model_dump_json(indent=2)
