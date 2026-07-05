@@ -2,8 +2,9 @@ import os
 from dotenv import load_dotenv
 from google import genai
 
-# Load .env file if it exists
-load_dotenv()
+# Load .env file from the script directory explicitly
+dotenv_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '.env')
+load_dotenv(dotenv_path)
 
 # Model Definitions
 # We use gemini-2.5-flash for faster responses and lower costs
