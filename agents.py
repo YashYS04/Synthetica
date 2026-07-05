@@ -241,5 +241,5 @@ class SecurityGuardrail:
             contents=prompt,
         )
         result = response.text.strip().upper()
-        return "SAFE" in result
+        return "SAFE" in result and "UNSAFE" not in result
 
